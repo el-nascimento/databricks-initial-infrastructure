@@ -1,13 +1,19 @@
 resource "aws_s3_bucket" "metastore" {
   bucket = "${local.prefix}-metastore"
-  acl    = "private"
-  versioning {
-    enabled = false
-  }
   force_destroy = true
-  tags = merge(local.tags, {
-    Name = "${local.prefix}-metastore"
-  })
+  tags = var.tags
+}
+
+resource "aws_s3_bucket_acl" "metastore" {
+  bucket = aws_s3_bucket.metastore.id
+  acl = "private"
+}
+
+resource "aws_s3_bucket_versioning" "metastore" {
+  bucket = aws_s3_bucket.metastore.id
+  versioning_configuration {
+    status = "Disabled"
+  }
 }
 
 resource "aws_s3_bucket_public_access_block" "metastore" {
@@ -58,9 +64,7 @@ resource "aws_iam_policy" "unity_metastore" {
       }
     ]
   })
-  tags = merge(local.tags, {
-    Name = "${local.prefix}-unity-catalog IAM policy"
-  })
+  tags = var.tags
 }
 
 // Required, in case https://docs.databricks.com/data/databricks-datasets.html are needed
@@ -85,16 +89,12 @@ resource "aws_iam_policy" "sample_data" {
       }
     ]
   })
-  tags = merge(local.tags, {
-    Name = "${local.prefix}-sample-data IAM policy"
-  })
+  tags = var.tags
 }
 
 resource "aws_iam_role" "metastore_data_access" {
   name                = "${local.prefix}-uc-access"
   assume_role_policy  = data.aws_iam_policy_document.passrole_for_uc.json
   managed_policy_arns = [aws_iam_policy.unity_metastore.arn, aws_iam_policy.sample_data.arn]
-  tags = merge(local.tags, {
-    Name = "${local.prefix}-unity-catalog IAM role"
-  })
+  tags = var.tags
 }

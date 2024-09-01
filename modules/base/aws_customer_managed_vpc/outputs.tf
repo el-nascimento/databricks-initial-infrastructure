@@ -7,3 +7,8 @@ output "workspace_id" {
   value       = databricks_mws_workspaces.this.id
   description = "Workspace numeric ID"
 }
+
+output "workspace_name" {
+  value       = databricks_mws_workspaces.this.workspace_name
+  description = "Workspace Name"
+}

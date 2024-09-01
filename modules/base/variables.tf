@@ -7,6 +7,7 @@ variable "cidr_block" {
 variable "tags" {
   type = map(string)
   description = "Tags for the resources"
+  default = {}
 }
 
 variable "region" {
@@ -26,13 +27,13 @@ variable "workspace_vpce_service" {
   type = string
 }
 
-variable "databricks_account_username" {
-  type = string
-}
+# variable "databricks_account_username" {
+#   type = string
+# }
 
-variable "databricks_account_password" {
-  type = string
-}
+# variable "databricks_account_password" {
+#   type = string
+# }
 
 variable "allow_ip_list" {
   type = list(string)
@@ -40,4 +41,12 @@ variable "allow_ip_list" {
 
 variable "use_ip_access_list" {
   type = bool
+}
+
+variable "project" {
+  type = string
+}
+
+variable "organization" {
+  type = string
 }

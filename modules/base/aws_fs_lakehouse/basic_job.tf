@@ -339,9 +339,13 @@ resource "databricks_job" "this" {
     }
   }
 
-  notebook_task {
-    notebook_path = databricks_notebook.this.path
+  task {
+    task_key = "01"
+    notebook_task {
+      notebook_path = databricks_notebook.this.path
+    }
   }
+
 }
 
 output "notebook_url" {

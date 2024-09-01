@@ -1,13 +1,19 @@
 resource "aws_s3_bucket" "root_storage_bucket" {
   bucket = "${local.prefix}-rootbucket"
-  acl    = "private"
-  versioning {
-    enabled = false
-  }
   force_destroy = true
-  tags = merge(var.tags, {
-    Name = "${local.prefix}-rootbucket"
-  })
+  tags = var.tags
+}
+
+resource "aws_s3_bucket_acl" "root_storage_bucket" {
+  bucket = aws_s3_bucket.root_storage_bucket.id
+  acl = "private"
+}
+
+resource "aws_s3_bucket_versioning" "root_storage_bucket" {
+  bucket = aws_s3_bucket.root_storage_bucket.id
+  versioning_configuration {
+    status = "Disabled"
+  }
 }
 
 resource "aws_s3_bucket_server_side_encryption_configuration" "root_storage_bucket" {

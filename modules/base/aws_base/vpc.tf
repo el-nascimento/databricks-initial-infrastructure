@@ -2,9 +2,9 @@ data "aws_availability_zones" "available" {}
 
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
-  version = "3.2.0"
+  version = "5.13.0"
 
-  name = local.prefix
+  name = "${local.prefix}-main-vpc"
   cidr = var.cidr_block
   azs  = data.aws_availability_zones.available.names
   tags = var.tags
@@ -33,7 +33,7 @@ module "vpc" {
 
 module "vpc_endpoints" {
   source  = "terraform-aws-modules/vpc/aws//modules/vpc-endpoints"
-  version = "3.2.0"
+  version = "5.13.0"
 
   vpc_id             = module.vpc.vpc_id
   security_group_ids = [module.vpc.default_security_group_id]

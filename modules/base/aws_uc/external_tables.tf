@@ -1,14 +1,19 @@
 resource "aws_s3_bucket" "external" {
   bucket = "${local.prefix}-external"
-  acl    = "private"
-  versioning {
-    enabled = false
-  }
-  // destroy all objects with bucket destroy
   force_destroy = true
-  tags = merge(local.tags, {
-    Name = "${local.prefix}-external"
-  })
+  tags = var.tags
+}
+
+resource "aws_s3_bucket_acl" "external" {
+  bucket = aws_s3_bucket.external.id
+  acl = "private"
+}
+
+resource "aws_s3_bucket_versioning" "external" {
+  bucket = aws_s3_bucket.external.id
+  versioning_configuration {
+    status = "Disabled"
+  }
 }
 
 resource "aws_s3_bucket_public_access_block" "external" {
@@ -42,16 +47,12 @@ resource "aws_iam_policy" "external_data_access" {
       }
     ]
   })
-  tags = merge(local.tags, {
-    Name = "${local.prefix}-unity-catalog external access IAM policy"
-  })
+  tags = var.tags
 }
 
 resource "aws_iam_role" "external_data_access" {
   name                = "${local.prefix}-external-access"
   assume_role_policy  = data.aws_iam_policy_document.passrole_for_uc.json
   managed_policy_arns = [aws_iam_policy.external_data_access.arn]
-  tags = merge(local.tags, {
-    Name = "${local.prefix}-unity-catalog external access IAM role"
-  })
+  tags = var.tags
 }
