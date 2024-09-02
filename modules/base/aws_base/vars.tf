@@ -27,7 +27,17 @@ variable "organization" {
   type = string
 }
 
+variable "prefix" {
+  type = string
+  description = "Resource prefix"
+}
+
+variable "workspace_name" {
+  type = string
+  description = "Name for workspace"
+}
+
 locals {
-  prefix = "${var.organization}-${var.project}-${var.region}"
+  prefix = var.prefix
 }
 

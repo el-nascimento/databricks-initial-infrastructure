@@ -1,12 +1,7 @@
 resource "aws_s3_bucket" "root_storage_bucket" {
-  bucket = "${local.prefix}-rootbucket"
+  bucket        = "${local.prefix}-rootbucket"
   force_destroy = true
-  tags = var.tags
-}
-
-resource "aws_s3_bucket_acl" "root_storage_bucket" {
-  bucket = aws_s3_bucket.root_storage_bucket.id
-  acl = "private"
+  tags          = var.tags
 }
 
 resource "aws_s3_bucket_versioning" "root_storage_bucket" {
@@ -45,3 +40,9 @@ resource "aws_s3_bucket_policy" "root_bucket_policy" {
   depends_on = [aws_s3_bucket_public_access_block.root_storage_bucket]
 }
 
+
+resource "databricks_mws_storage_configurations" "this" {
+  account_id                 = var.databricks_account_id
+  bucket_name                = aws_s3_bucket.root_storage_bucket.bucket
+  storage_configuration_name = "${local.prefix}-storage-configuration"
+}
