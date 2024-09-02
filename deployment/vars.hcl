@@ -1,6 +1,6 @@
 locals {
-  project      = "databricks-cert"
-  organization = "qubika"
+  project               = "databricks-cert"
+  organization          = "qubika"
 }
 
 inputs = {
