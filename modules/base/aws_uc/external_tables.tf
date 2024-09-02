@@ -4,11 +4,6 @@ resource "aws_s3_bucket" "external" {
   tags = var.tags
 }
 
-resource "aws_s3_bucket_acl" "external" {
-  bucket = aws_s3_bucket.external.id
-  acl = "private"
-}
-
 resource "aws_s3_bucket_versioning" "external" {
   bucket = aws_s3_bucket.external.id
   versioning_configuration {

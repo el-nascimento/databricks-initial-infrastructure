@@ -4,11 +4,6 @@ resource "aws_s3_bucket" "metastore" {
   tags = var.tags
 }
 
-resource "aws_s3_bucket_acl" "metastore" {
-  bucket = aws_s3_bucket.metastore.id
-  acl = "private"
-}
-
 resource "aws_s3_bucket_versioning" "metastore" {
   bucket = aws_s3_bucket.metastore.id
   versioning_configuration {
