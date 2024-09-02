@@ -31,7 +31,12 @@ variable "organization" {
   type = string
 }
 
+variable "prefix" {
+  type = string
+  description = "Resource prefix"
+}
+
 locals {
-  prefix = "${var.organization}-${var.project}-${var.region}-fs-lakehouse"
+  prefix = "${var.prefix}-fs-lakehouse"
   ext_s3_bucket = "${local.prefix}-ext-bucket"
 }

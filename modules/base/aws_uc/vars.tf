@@ -33,6 +33,11 @@ variable "tags" {
   default = { }
 }
 
+variable "prefix" {
+  type = string
+  description = "Resource prefix"
+}
+
 locals {
-  prefix = "${var.organization}-${var.project}-${var.region}-demo"
+  prefix = "${var.prefix}-demo"
 }
