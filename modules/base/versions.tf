@@ -18,27 +18,28 @@ terraform {
 
     random = {
       source  = "hashicorp/random"
-      version = "~> 2.3.0"
+      version = "~> 3.6.2"
     }
 
-    template = {
-      source  = "hashicorp/template"
-      version = "~> 2.1.2"
-    }
+    # WARN: no support for apple silicon
+    # template = {
+    #   source  = "hashicorp/template"
+    #   version = "~> 2.2.0"
+    # }
 
     archive = {
       source  = "hashicorp/archive"
-      version = "~> 2.0.0"
+      version = "~> 2.5.0"
     }
 
     http = {
       source  = "hashicorp/http"
-      version = "~> 1.1.1"
+      version = "~> 3.4.4"
     }
 
     local = {
       source  = "hashicorp/local"
-      version = "~> 1.4.0"
+      version = "~> 2.5.1"
     }
 
   }
