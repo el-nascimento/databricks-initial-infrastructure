@@ -42,12 +42,6 @@ provider "aws" {
     }
 }
 
-provider "databricks" {
-  alias         = "mws"
-  host          = "https://accounts.cloud.databricks.com"
-  account_id    = "${local.databricks_account_id}"
-}
-
 EOF
 }
 
