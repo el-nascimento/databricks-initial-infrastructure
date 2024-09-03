@@ -1,18 +1,18 @@
 output "databricks_host_id" {
-  value = module.aws_base.databricks_host_id
+  value = module.databricks_base.databricks_host_id
 }
 
 output "databricks_host" {
-  value = module.aws_base.databricks_host
+  value = module.databricks_base.databricks_host
 }
 
 output "databricks_host_name" {
-  value       = module.aws_base.databricks_host_name
+  value       = module.databricks_base.databricks_host_name
   description = "Workspace Name"
 }
 
 output "databricks_token" {
-  value       = module.aws_base.databricks_token
+  value       = module.databricks_base.databricks_token
   sensitive   = true
   description = "Databricks workspace management token"
 }

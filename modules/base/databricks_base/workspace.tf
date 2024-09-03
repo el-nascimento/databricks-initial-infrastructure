@@ -14,3 +14,4 @@ resource "databricks_mws_workspaces" "this" {
   depends_on = [ databricks_mws_networks.this ]
 
 }
+

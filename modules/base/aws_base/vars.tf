@@ -19,22 +19,9 @@ variable "region" {
   type = string
 }
 
-variable "project" {
-  type = string
-}
-
-variable "organization" {
-  type = string
-}
-
 variable "prefix" {
   type = string
   description = "Resource prefix"
-}
-
-variable "workspace_name" {
-  type = string
-  description = "Name for workspace"
 }
 
 locals {
