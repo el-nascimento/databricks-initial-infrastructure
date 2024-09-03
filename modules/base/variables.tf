@@ -27,14 +27,6 @@ variable "databricks_account_id" {
 #   type = string
 # }
 
-variable "allow_ip_list" {
-  type = list(string)
-}
-
-variable "use_ip_access_list" {
-  type = bool
-}
-
 variable "project" {
   type = string
 }
