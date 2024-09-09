@@ -42,7 +42,6 @@ generate "db_provider" {
 provider "databricks" {
   alias         = "workspace"
   host          = "${dependency.base.outputs.databricks_host}"
-  token         = "${dependency.base.outputs.databricks_token}"
 }
 EOF
 }
