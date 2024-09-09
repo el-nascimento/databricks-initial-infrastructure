@@ -1,5 +1,6 @@
 include "root" {
   path = find_in_parent_folders("terragrunt.hcl")
+  expose = true
 }
 
 include "vars" {
@@ -28,10 +29,6 @@ locals {
 
 inputs = {
   cidr_block = "10.3.0.0/16"
-  allow_ip_list = [
-    "104.30.133.4/32"
-  ]
-  use_ip_access_list = true
   workspace_name     = local.workspace_name
   prefix             = local.prefix
 }
@@ -41,8 +38,8 @@ generate "db_provider" {
   if_exists = "overwrite_terragrunt"
   contents  = <<EOF
 provider "databricks" {
-  alias         = "workspace"
-  host          = "${local.workspace_name}"
+  host          = "https://accounts.cloud.databricks.com"
+  account_id    = "${include.root.locals.databricks_account_id}"
 }
 EOF
 }
