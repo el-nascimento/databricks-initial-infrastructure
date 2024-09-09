@@ -23,3 +23,7 @@ output "root_bucket" {
   description = "root bucket"
 }
 
+output "logdelivery_bucket" {
+  value = module.log-bucket.s3_bucket_id
+  description = "logdelivery bucket"
+}

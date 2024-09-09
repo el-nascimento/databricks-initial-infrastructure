@@ -6,6 +6,10 @@ variable "root_storage_bucket_name" {
   type = string
 }
 
+variable "logdelivery_bucket_name" {
+  type = string
+}
+
 variable "prefix" {
   type = string
 }

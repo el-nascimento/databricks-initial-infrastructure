@@ -1,3 +1,4 @@
+// Root bucket storage
 resource "aws_s3_bucket_policy" "root_bucket_policy" {
   bucket     = var.root_storage_bucket_name
   policy     = data.databricks_aws_bucket_policy.this.json

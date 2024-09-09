@@ -15,6 +15,7 @@ module "databricks_base" {
   databricks_account_id    = var.databricks_account_id
   cross_account_role_arn   = module.aws_base.cross_account_role_arn
   root_storage_bucket_name = module.aws_base.root_bucket
+  logdelivery_bucket_name  = module.aws_base.logdelivery_bucket
   vpc_id                   = module.aws_base.vpc_id
   security_group_ids       = module.aws_base.security_group
   subnets                  = module.aws_base.subnets

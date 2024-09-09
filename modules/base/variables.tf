@@ -19,14 +19,6 @@ variable "databricks_account_id" {
   type = string
 }
 
-variable "project" {
-  type = string
-}
-
-variable "organization" {
-  type = string
-}
-
 variable "workspace_name" {
   type = string
 }
