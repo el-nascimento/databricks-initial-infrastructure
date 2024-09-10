@@ -1,13 +1,12 @@
-data "databricks_current_user" "me" {
+data "databricks_spark_version" "latest" {
+  latest = true
 }
-
-data "databricks_spark_version" "latest" {}
 data "databricks_node_type" "smallest" {
   local_disk = true
 }
 
 resource "databricks_notebook" "this" {
-  path     = "${data.databricks_current_user.me.home}/Terraform"
+  path     = "sample/sample-job"
   language = "PYTHON"
   content_base64 = base64encode(<<-EOT
 # Databricks notebook source
@@ -313,7 +312,7 @@ truncate()
 
 
 resource "databricks_job" "this" {
-  name = "FS Blueprints Quickstart Job (${data.databricks_current_user.me.alphanumeric})"
+  name = "FS Blueprints Quickstart Job"
 
   new_cluster {
     spark_version       = data.databricks_spark_version.latest.id
