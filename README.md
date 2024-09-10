@@ -16,6 +16,7 @@ where users are created (either through IAM or IAM Identity Center SSO).
 
 This account structure could look something like this
 
+```
 __
   |-->qubika-admin-account (Administrator)
   |
@@ -26,6 +27,7 @@ __
         |-->qubika-project-qa (QA)
         |
         |-->qubika-project-prod (Production)
+```
 
 
 This repository assumes a few resources for the "umbrella" AWS account already exist:
