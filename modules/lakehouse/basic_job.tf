@@ -322,6 +322,7 @@ resource "databricks_job" "this" {
 
   task {
     task_key = "01"
+    existing_cluster_id =  var.job_cluster_id
     notebook_task {
       notebook_path = databricks_notebook.this.path
     }
