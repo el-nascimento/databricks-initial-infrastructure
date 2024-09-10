@@ -6,7 +6,7 @@ data "databricks_node_type" "smallest" {
 }
 
 resource "databricks_notebook" "this" {
-  path     = "sample/sample-job"
+  path     = "/sample/sample-job"
   language = "PYTHON"
   content_base64 = base64encode(<<-EOT
 # Databricks notebook source
