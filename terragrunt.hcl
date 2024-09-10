@@ -42,6 +42,8 @@ provider "aws" {
     }
 }
 
+provider "random" {}
+
 EOF
 }
 
