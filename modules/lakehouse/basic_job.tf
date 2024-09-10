@@ -1,10 +1,3 @@
-data "databricks_spark_version" "latest" {
-  latest = true
-}
-data "databricks_node_type" "smallest" {
-  local_disk = true
-}
-
 resource "databricks_notebook" "this" {
   path     = "/sample/sample-job"
   language = "PYTHON"
@@ -310,20 +303,10 @@ truncate()
 }
 
 
-
 resource "databricks_job" "this" {
   name = "FS Blueprints Quickstart Job"
 
-  new_cluster {
-    spark_version       = data.databricks_spark_version.latest.id
-    node_type_id        = data.databricks_node_type.smallest.id
-    enable_elastic_disk = false
-    num_workers         = 1
-    aws_attributes {
-      availability = "SPOT"
-    }
-    data_security_mode = "SINGLE_USER"
-  }
+  existing_cluster_id = var.job_cluster_id
 
   library {
     pypi {
@@ -344,12 +327,4 @@ resource "databricks_job" "this" {
     }
   }
 
-}
-
-output "notebook_url" {
-  value = databricks_notebook.this.url
-}
-
-output "job_url" {
-  value = databricks_job.this.url
 }

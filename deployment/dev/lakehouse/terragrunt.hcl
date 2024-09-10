@@ -24,6 +24,7 @@ terraform {
 locals {
   prefix         = "${include.vars.locals.organization}-${include.vars.locals.project}-${include.region.locals.region}"
   workspace_name = local.prefix
+  job_cluster_id = dependency.cluster.outputs.cluster_id
 }
 
 inputs = {
@@ -35,6 +36,10 @@ inputs = {
 
 dependency "base" {
   config_path = "../base"
+}
+
+dependency "cluster" {
+  config_path = "../single-node-cluster"
 }
 
 generate "db_provider" {
