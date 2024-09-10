@@ -22,3 +22,8 @@ output "root_bucket" {
   value       = aws_s3_bucket.root_storage_bucket.bucket
   description = "root bucket"
 }
+
+output "logdelivery_bucket" {
+  value = module.log-bucket.s3_bucket_id
+  description = "logdelivery bucket"
+}

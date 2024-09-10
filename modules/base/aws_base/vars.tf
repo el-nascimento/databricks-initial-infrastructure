@@ -1,27 +1,30 @@
-variable "databricks_account_username" {}
-variable "databricks_account_password" {}
-variable "databricks_account_id" {}
+# variable "databricks_account_username" {}
+# variable "databricks_account_password" {}
+variable "databricks_account_id" {
+  type = string
+}
 
 
 variable "tags" {
   default = {}
+  type = map(string)
 }
 
 variable "cidr_block" {
-  default = "10.4.0.0/16"
+  # default = "10.4.0.0/16"
+  type = string
 }
 
 variable "region" {
-  default = "eu-west-1"
+  type = string
 }
 
-resource "random_string" "naming" {
-  special = false
-  upper   = false
-  length  = 6
+variable "prefix" {
+  type = string
+  description = "Resource prefix"
 }
 
 locals {
-  prefix = "demo${random_string.naming.result}"
+  prefix = var.prefix
 }
 

@@ -1,9 +1,3 @@
-variable "cidr_block" {
-  type        = string
-  description = "The address space for the Databricks vpc"
-  # default = "10.0.2.0/24"
-}
-
 variable "tags" {
   type        = map(string)
   description = "Tags for the resources"
@@ -19,10 +13,26 @@ variable "databricks_account_id" {
   type = string
 }
 
-variable "workspace_name" {
+# variable "databricks_account_username" {
+#   type = string
+# }
+
+# variable "databricks_account_password" {
+#   type = string
+# }
+
+variable "project" {
+  type = string
+}
+
+variable "organization" {
   type = string
 }
 
 variable "prefix" {
   type = string
+}
+
+variable "workspaces_to_associate" {
+  type = list(string)
 }

@@ -1,6 +1,5 @@
 include "root" {
   path = find_in_parent_folders("terragrunt.hcl")
-  expose = true
 }
 
 include "vars" {
@@ -19,18 +18,28 @@ include "region" {
 }
 
 terraform {
-  source = "../../../modules//base"
+  source = "../../../modules//lakehouse"
 }
 
 locals {
   prefix = "${include.vars.locals.organization}-${include.vars.locals.project}-${include.region.locals.region}-${include.environment.locals.environment}"
-  workspace_name = local.prefix
 }
 
 inputs = {
-  cidr_block = "10.3.0.0/16"
-  workspace_name     = local.workspace_name
+  allow_ip_list = [
+    "191.13.238.152"
+  ]
   prefix             = local.prefix
+  use_ip_access_list = false
+  job_cluster_id     = dependency.cluster.outputs.cluster_id
+}
+
+dependency "base" {
+  config_path = "../base"
+}
+
+dependency "cluster" {
+  config_path = "../single-node-cluster"
 }
 
 generate "db_provider" {
@@ -38,8 +47,7 @@ generate "db_provider" {
   if_exists = "overwrite_terragrunt"
   contents  = <<EOF
 provider "databricks" {
-  host          = "https://accounts.cloud.databricks.com"
-  account_id    = "${include.root.locals.databricks_account_id}"
+  host          = "${dependency.base.outputs.databricks_host}"
 }
 EOF
 }
