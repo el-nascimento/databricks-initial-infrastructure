@@ -323,7 +323,6 @@ resource "databricks_job" "this" {
       availability = "SPOT"
     }
     data_security_mode = "SINGLE_USER"
-    custom_tags        = { "clusterSource" = "lakehouse-blueprints" }
   }
 
   library {
