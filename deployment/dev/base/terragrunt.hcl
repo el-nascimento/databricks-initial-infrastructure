@@ -23,7 +23,7 @@ terraform {
 }
 
 locals {
-  prefix         = "${include.vars.locals.organization}-${include.vars.locals.project}-${include.region.locals.region}"
+  prefix = "${include.vars.locals.organization}-${include.vars.locals.project}-${include.region.locals.region}-${include.environment.locals.environment}"
   workspace_name = local.prefix
 }
 

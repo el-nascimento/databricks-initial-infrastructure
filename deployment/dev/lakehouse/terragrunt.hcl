@@ -22,9 +22,7 @@ terraform {
 }
 
 locals {
-  prefix         = "${include.vars.locals.organization}-${include.vars.locals.project}-${include.region.locals.region}"
-  workspace_name = local.prefix
-  job_cluster_id = dependency.cluster.outputs.cluster_id
+  prefix = "${include.vars.locals.organization}-${include.vars.locals.project}-${include.region.locals.region}-${include.environment.locals.environment}"
 }
 
 inputs = {
