@@ -3,6 +3,10 @@ variable "prefix" {
 }
 
 variable "cluster_config" {
+  description = <<EOF
+  Cluster configuration object. Includes many configuration attributes.
+  If only cluster name is provided will create a single-node cluster.
+  EOF
   type = object({
     spark_version                = optional(string)
     node_type_id                 = optional(string)
@@ -16,6 +20,7 @@ variable "cluster_config" {
     autotermination_minutes      = optional(number)
     spark_conf                   = optional(map(string))
     custom_tags                  = optional(map(string))
+    aws_availability             = optional(string)
   })
 }
 
@@ -44,4 +49,5 @@ locals {
   custom_tags        = local.num_workers == 0 ? merge(var.cluster_config.custom_tags, local.single_node_custom_tags) : var.cluster_config.custom_tags
   data_security_mode = local.num_workers == 0 ? "SINGLE_USER" : var.cluster_config.data_security_mode != null ? var.cluster_config.data_security_mode : "SINGLE_USER"
   single_user_name   = local.data_security_mode == "SINGLE_USER" ? var.cluster_config.single_user_name : null
+  aws_availability   = var.cluster_config.aws_availability == null ? "SPOT_WITH_FALLBACK" : var.cluster_config.aws_availability
 }

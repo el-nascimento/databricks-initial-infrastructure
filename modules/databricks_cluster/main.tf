@@ -14,7 +14,7 @@ resource "databricks_cluster" "this" {
   spark_conf                   = local.spark_conf
   custom_tags                  = local.custom_tags
   aws_attributes {
-    availability = "SPOT"
+    availability = local.aws_availability
   }
 }
 
