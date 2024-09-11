@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+aws iam create-user --user-name TerraformAdmin &&
+  aws iam create-access-key --user-name TerraformAdmin

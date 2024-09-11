@@ -31,16 +31,25 @@ __
 
 
 This repository assumes a few resources for the "umbrella" AWS account already exist:
-* TerraformAdminRole: a role in the "umbrella" account
-* TerraformChildRole: a role existing in each of the child accounts
+* `TerraformAdmin`: a user in the "umbrella" account
+* `TerraformAdminRole`: a role in the "umbrella" account
+* `TerraformChildRole`: a role existing in each of the child accounts
 
 The child roles should have an assume role policy allowing the admin role to
 assume them, and these child roles should have administrator permissions in
 their respective accounts.
 
+The admin role should have an assume role policy allowing the admin user to
+assume the role.
+
 Additionally, the administrator role should have full s3 access to the
 terraform state buckets in the "umbrella" account, where the state backend will
 be stored. This ensures that terraform can manage the state files successfully.
+
+Terragrunt will use the admin user credentials to assume the admin role, and
+then assume the child roles according to the environment.
+
+`TerraformAdmin (user) => TerraformAdminRole (role) => TerraformChildRole (role)`
 
 ## Installation
 
