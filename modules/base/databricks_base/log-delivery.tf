@@ -21,7 +21,7 @@ resource "aws_s3_bucket_policy" "logdelivery" {
 }
 
 resource "databricks_mws_credentials" "log_writer" {
-  credentials_name = "Usage Delivery"
+  credentials_name = "${local.prefix}-log-delivery-creds"
   role_arn = aws_iam_role.logdelivery.arn
 }
 
