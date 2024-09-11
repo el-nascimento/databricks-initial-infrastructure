@@ -35,6 +35,14 @@ inputs = {
     autotermination_minutes = 10
     num_workers             = 0
   }
+
+  pypi_libraries = [
+    "dbl-waterbear",
+    "dbl-tempo"
+  ]
+
+  maven_libraries = []
+
 }
 
 dependency "base" {

@@ -24,6 +24,16 @@ variable "cluster_config" {
   })
 }
 
+variable "maven_libraries" {
+  type = list(string)
+  default = []
+}
+
+variable "pypi_libraries" {
+  type = list(string)
+  default = []
+}
+
 data "databricks_spark_version" "latest" {
   latest = true
 }
@@ -50,4 +60,5 @@ locals {
   data_security_mode = local.num_workers == 0 ? "SINGLE_USER" : var.cluster_config.data_security_mode != null ? var.cluster_config.data_security_mode : "SINGLE_USER"
   single_user_name   = local.data_security_mode == "SINGLE_USER" ? var.cluster_config.single_user_name : null
   aws_availability   = var.cluster_config.aws_availability == null ? "SPOT_WITH_FALLBACK" : var.cluster_config.aws_availability
+  prefix = var.prefix
 }
