@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+source ./vars &&
+  aws iam create-role --role-name TerraformChildRole \
+    --assume-role-policy-document "${child_assume_role_policy}" \
+    --description "Terraform AdministratorAccess role to provision infrastructure" &&
+  aws iam attach-role-policy --role-name TerraformChildRole --policy-arn arn:aws:iam::aws:policy/AdministratorAccess
