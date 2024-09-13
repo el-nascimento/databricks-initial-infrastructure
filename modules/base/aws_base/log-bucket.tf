@@ -3,6 +3,7 @@ module "log-bucket" {
   version = "4.1.2"
   bucket = "${local.prefix}-log-storage"
   tags = var.tags
+  force_destroy = true
   versioning = {
     status = "Disabled"
   }

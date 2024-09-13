@@ -38,6 +38,10 @@ variable "prefix" {
   description = "Resource prefix"
 }
 
+variable "catalogs" {
+  
+}
+
 locals {
   prefix = "${var.prefix}-demo"
 }

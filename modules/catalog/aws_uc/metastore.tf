@@ -15,8 +15,8 @@ resource "databricks_metastore_data_access" "this" {
 }
 
 resource "databricks_metastore_assignment" "default_metastore" {
-  count                = length(var.workspaces_to_associate)
-  workspace_id         = var.workspaces_to_associate[count.index]
+  for_each             = { for x in var.workspaces_to_associate : x => x }
+  workspace_id         = each.key
   metastore_id         = databricks_metastore.this.id
   default_catalog_name = "hive_metastore"
 }

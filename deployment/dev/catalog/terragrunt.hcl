@@ -40,7 +40,6 @@ generate "db_provider" {
   if_exists = "overwrite_terragrunt"
   contents  = <<EOF
 provider "databricks" {
-  alias         = "workspace"
   host          = "${dependency.base.outputs.databricks_host}"
 }
 EOF

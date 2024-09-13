@@ -38,6 +38,7 @@ provider "aws" {
             environment = "${local.environment}"
             project = "${local.project}"
             organization = "${local.organization}"
+            owner = "Terraform"
         }
     }
 }
