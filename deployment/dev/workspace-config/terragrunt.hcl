@@ -18,7 +18,7 @@ include "region" {
 }
 
 terraform {
-  source = "../../../modules//databricks_cluster"
+  source = "../../../modules//databricks_workspace"
 }
 
 locals {
@@ -27,30 +27,10 @@ locals {
 
 inputs = {
   prefix = local.prefix
-  cluster_config = {
-    cluster_name            = "${local.prefix}-single-node-sandbox-cluster"
-    data_security_mode      = "SINGLE_USER"
-    single_user_name        = "lucas.nascimento@qubika.com"
-    runtime_engine          = "STANDARD"
-    autotermination_minutes = 10
-    num_workers             = 0
-  }
-
-  pypi_libraries = [
-    "dbl-waterbear",
-    "dbl-tempo"
-  ]
-
-  maven_libraries = []
-
 }
 
 dependency "base" {
   config_path = "../base"
-}
-
-dependency "workspace_config" {
-  config_path = "../workspace-config"
 }
 
 generate "db_provider" {
