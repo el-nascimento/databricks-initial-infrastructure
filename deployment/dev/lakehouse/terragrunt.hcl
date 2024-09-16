@@ -21,16 +21,7 @@ terraform {
   source = "../../../modules//lakehouse"
 }
 
-locals {
-  prefix = "${include.vars.locals.organization}-${include.vars.locals.project}-${include.region.locals.region}-${include.environment.locals.environment}"
-}
-
 inputs = {
-  allow_ip_list = [
-    "191.13.238.152"
-  ]
-  prefix             = local.prefix
-  use_ip_access_list = false
   job_cluster_id     = dependency.cluster.outputs.cluster_id
 }
 

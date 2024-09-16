@@ -49,8 +49,8 @@ dependency "base" {
   config_path = "../base"
 }
 
-dependency "workspace_config" {
-  config_path = "../workspace-config"
+dependencies {
+  paths = ["../workspace-config", "../base"]
 }
 
 generate "db_provider" {
