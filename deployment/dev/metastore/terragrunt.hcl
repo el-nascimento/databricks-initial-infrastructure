@@ -41,7 +41,7 @@ generate "db_provider" {
   contents  = <<EOF
 provider "databricks" {
   alias         = "workspace"
-  host          = "${dependency.base.outputs.databricks_host}"
+  account_id    = "${include.root.locals.databricks_account_id}"
 }
 EOF
 }
