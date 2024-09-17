@@ -1,5 +1,6 @@
 include "root" {
-  path = find_in_parent_folders("terragrunt.hcl")
+  path   = find_in_parent_folders("terragrunt.hcl")
+  expose = true
 }
 
 include "vars" {
@@ -18,17 +19,16 @@ include "region" {
 }
 
 terraform {
-  source = "../../../modules//catalog"
+  source = "../../../modules//databricks_metastore"
 }
 
 locals {
-  prefix         = "${include.vars.locals.organization}-${include.vars.locals.project}-${include.region.locals.region}"
-  workspace_name = local.prefix
+  prefix = "${include.vars.locals.organization}-${include.vars.locals.project}-${include.region.locals.region}"
 }
 
 inputs = {
-  prefix                  = local.prefix
-  workspaces_to_associate = [dependency.base.outputs.databricks_host_id]
+  prefix             = local.prefix
+  databricks_host_id = dependency.base.outputs.databricks_host_id
 }
 
 dependency "base" {
@@ -40,7 +40,6 @@ generate "db_provider" {
   if_exists = "overwrite_terragrunt"
   contents  = <<EOF
 provider "databricks" {
-  alias         = "workspace"
   host          = "${dependency.base.outputs.databricks_host}"
 }
 EOF
