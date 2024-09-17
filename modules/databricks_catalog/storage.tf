@@ -1,7 +1,8 @@
 module "bucket" {
-  source  = "terraform-aws-modules/s3-bucket/aws"
-  version = "4.1.2"
-  bucket  = local.catalog_bucket
+  source        = "terraform-aws-modules/s3-bucket/aws"
+  version       = "4.1.2"
+  bucket        = local.catalog_bucket
+  force_destroy = true
   versioning = {
     status = "Disabled"
   }
@@ -39,13 +40,17 @@ resource "aws_iam_policy" "catalog" {
     Statement = [
       {
         "Action" : [
-          "s3:GetObject",
-          "s3:GetObjectVersion",
-          "s3:PutObject",
-          "s3:PutObjectAcl",
-          "s3:DeleteObject",
-          "s3:ListBucket",
-          "s3:GetBucketLocation"
+          "s3:Get*",
+          "s3:Put*",
+          "s3:List*",
+          "s3:DeleteObject"
+          # "s3:GetObject",
+          # "s3:GetObjectVersion",
+          # "s3:PutObject",
+          # "s3:PutObjectAcl",
+          # "s3:DeleteObject",
+          # "s3:ListBucket",
+          # "s3:GetBucketLocation"
         ],
         "Resource" : [
           module.bucket.s3_bucket_arn,
@@ -59,7 +64,7 @@ resource "aws_iam_policy" "catalog" {
 
 
 resource "aws_iam_role" "catalog_data_access" {
-  name                = "${local.catalog_bucket}-catalog-access"
+  name                = "${local.catalog_bucket}-access"
   assume_role_policy  = data.aws_iam_policy_document.passrole_for_catalog.json
   managed_policy_arns = [aws_iam_policy.catalog.arn]
 }

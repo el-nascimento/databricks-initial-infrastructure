@@ -20,7 +20,16 @@ variable "metastore_id" {
   type = string
 }
 
+data "databricks_group" "engineers" {
+  display_name = "DataEngineers"
+}
+
+data "databricks_group" "administrators" {
+  display_name = "Administrators"
+}
+
 locals {
   prefix = var.prefix
-  catalog_bucket = "${local.prefix}-${var.name}-catalog"
+  catalog_bucket = "${local.prefix}-catalog"
+  catalog_storage = "s3://${module.bucket.s3_bucket_id}/metastore"
 }
