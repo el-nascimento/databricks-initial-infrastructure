@@ -10,14 +10,6 @@ variable "region" {
   type = string
 }
 
-variable "project" {
-  type = string
-}
-
-variable "organization" {
-  type = string
-}
-
 variable "tags" {
   type = map(string)
   default = { }
@@ -29,5 +21,5 @@ variable "prefix" {
 }
 
 locals {
-  prefix = "${var.prefix}-demo"
+  prefix = var.prefix
 }

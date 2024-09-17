@@ -7,8 +7,10 @@ resource "databricks_metastore" "this" {
 
 
 resource "databricks_metastore_data_access" "this" {
-  metastore_id = databricks_metastore.this.id
-  name         = aws_iam_role.metastore_data_access.name
+  metastore_id  = databricks_metastore.this.id
+  force_destroy = true
+  force_update  = true
+  name          = aws_iam_role.metastore_data_access.name
   aws_iam_role {
     role_arn = aws_iam_role.metastore_data_access.arn
   }
