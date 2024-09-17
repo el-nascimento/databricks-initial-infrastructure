@@ -24,6 +24,18 @@ variable "cluster_config" {
   })
 }
 
+variable "spark_version" {
+  type = bool
+  default = null
+  description = "Version of spark for the runtime"
+}
+
+variable "use_lts_runtime" {
+  default = true
+  type = bool
+  description = "Use an LTS runtime"
+}
+
 variable "maven_libraries" {
   type = list(string)
   default = []
@@ -36,6 +48,8 @@ variable "pypi_libraries" {
 
 data "databricks_spark_version" "latest" {
   latest = true
+  long_term_support = var.use_lts_runtime
+  spark_version = var.spark_version
 }
 
 data "databricks_node_type" "smallest" {

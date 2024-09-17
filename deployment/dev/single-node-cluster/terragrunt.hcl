@@ -32,7 +32,8 @@ inputs = {
     data_security_mode      = "SINGLE_USER"
     single_user_name        = "lucas.nascimento@qubika.com"
     runtime_engine          = "STANDARD"
-    autotermination_minutes = 10
+    node_type_id            = "m5d.large"
+    autotermination_minutes = 30
     num_workers             = 0
   }
 
