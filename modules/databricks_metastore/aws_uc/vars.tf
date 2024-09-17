@@ -3,20 +3,15 @@ variable "databricks_account_id" {
 }
 
 variable "databricks_host_id" {
-  type        = string
+  type = string
 }
 
 variable "region" {
   type = string
 }
 
-variable "tags" {
-  type = map(string)
-  default = { }
-}
-
 variable "prefix" {
-  type = string
+  type        = string
   description = "Resource prefix"
 }
 

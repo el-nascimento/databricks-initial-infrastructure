@@ -26,10 +26,10 @@ locals {
 }
 
 inputs = {
-  name                  = "sandbox"
-  metastore_id          = dependency.metastore.outputs.databricks_metastore_id
-  metastore_data_bucket = dependency.metastore.outputs.metastore_data_bucket
-  prefix                = local.prefix
+  name               = "sandbox"
+  metastore_id       = dependency.metastore.outputs.databricks_metastore_id
+  databricks_host_id = dependency.base.outputs.databricks_host_id
+  prefix             = local.prefix
 }
 
 dependency "base" {
