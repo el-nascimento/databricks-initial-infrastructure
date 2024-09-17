@@ -13,3 +13,7 @@ output "databricks_external_location" {
 output "databricks_metastore_storage_root" {
   value = databricks_metastore.this.storage_root
 }
+
+output "metastore_data_bucket" {
+  value = aws_s3_bucket.metastore.id
+}
