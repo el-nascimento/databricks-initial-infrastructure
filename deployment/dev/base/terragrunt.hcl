@@ -1,3 +1,8 @@
+include "backend" {
+  path   = find_in_parent_folders("backend.hcl")
+  expose = true
+}
+
 include "root" {
   path = find_in_parent_folders("terragrunt.hcl")
   expose = true
@@ -33,13 +38,17 @@ inputs = {
   prefix             = local.prefix
 }
 
+dependencies {
+  paths = ["../../metastore"]
+}
+
 generate "db_provider" {
   path      = "databricks_provider.tf"
   if_exists = "overwrite_terragrunt"
   contents  = <<EOF
 provider "databricks" {
   host          = "https://accounts.cloud.databricks.com"
-  account_id    = "${include.root.locals.databricks_account_id}"
+  account_id    = "${include.backend.locals.databricks_account_id}"
 }
 EOF
 }
