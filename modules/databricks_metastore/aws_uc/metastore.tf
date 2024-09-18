@@ -5,9 +5,3 @@ resource "databricks_metastore" "this" {
   region        = var.region
   owner         = data.databricks_group.administrators.display_name
 }
-
-resource "databricks_metastore_assignment" "default_metastore" {
-  workspace_id         = var.databricks_host_id
-  metastore_id         = databricks_metastore.this.id
-  default_catalog_name = "hive_metastore"
-}
