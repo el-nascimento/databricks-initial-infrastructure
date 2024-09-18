@@ -89,6 +89,18 @@ providers possible.
     * Workspace: will create a new databricks workspace
 * **single-node-cluster**: creates a new single node cluster to be used on jobs and all-purpose-compute
 * **lakehouse**: creates new sample jobs and repositories to test out with the new single node cluster
+* **metastore**: creates a metastore for the catalogs in databricks. Metastores should not be backed by external storage, since they are environment independent
+* **catalog**: creates a catalog for the environment. Catalogs act as a database, and will be backed by environment specific storage
+  * Schemas: will create `sandbox` and `raw` schemas, with attached volumes pointing to s3 buckets where raw data should be dropped for ingestion
+  * Managed storage: will create a managed storage bucket to store the catalog managed tables
+
+## Notes
+
+* Data Governance: this project uses the Databricks Unity Catalog for centralized data governance. All data assets will be registered and controlled through the catalog, and no user should have access to the underlying storage (managed or external).
+
+## Architecture Diagram
+
+![Diagram](./docs/databricks-infra-base.excalidraw.png)
 
 ## TODOs
 
