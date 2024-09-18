@@ -1,4 +1,5 @@
 
+// Catalog
 resource "databricks_catalog" "catalog" {
   name           = var.name
   metastore_id   = var.metastore_id
@@ -13,6 +14,7 @@ resource "databricks_external_location" "catalog" {
   name            = "${local.catalog_bucket}-external-location"
   url             = local.catalog_storage
   credential_name = databricks_storage_credential.catalog.id
+  owner           = data.databricks_group.administrators.display_name
 }
 
 resource "databricks_storage_credential" "catalog" {
@@ -22,4 +24,5 @@ resource "databricks_storage_credential" "catalog" {
   aws_iam_role {
     role_arn = aws_iam_role.catalog_data_access.arn
   }
+  owner = data.databricks_group.administrators.display_name
 }

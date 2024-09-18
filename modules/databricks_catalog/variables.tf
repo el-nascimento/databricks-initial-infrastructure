@@ -1,6 +1,6 @@
 
 variable "name" {
-  type = string
+  type        = string
   description = "Name of the catalog"
 }
 
@@ -29,7 +29,10 @@ data "databricks_group" "administrators" {
 }
 
 locals {
-  prefix = var.prefix
-  catalog_bucket = "${local.prefix}-catalog"
+  prefix          = var.prefix
+  catalog_bucket  = "${local.prefix}-catalog"
   catalog_storage = "s3://${module.bucket.s3_bucket_id}/metastore"
+  raw_bucket      = "${local.prefix}-raw"
+  sandbox_bucket  = "${local.prefix}-sandbox"
+  unity_catalog_role_arn = "arn:aws:iam::414351767826:role/unity-catalog-prod-UCMasterRole-14S5ZJVKOTYTL"
 }

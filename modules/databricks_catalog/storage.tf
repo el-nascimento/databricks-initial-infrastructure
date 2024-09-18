@@ -22,7 +22,7 @@ data "aws_iam_policy_document" "passrole_for_catalog" {
     effect  = "Allow"
     actions = ["sts:AssumeRole"]
     principals {
-      identifiers = ["arn:aws:iam::414351767826:role/unity-catalog-prod-UCMasterRole-14S5ZJVKOTYTL"]
+      identifiers = [local.unity_catalog_role_arn]
       type        = "AWS"
     }
     condition {
