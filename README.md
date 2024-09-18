@@ -98,6 +98,9 @@ providers possible.
 
 * Data Governance: this project uses the Databricks Unity Catalog for centralized data governance. All data assets will be registered and controlled through the catalog, and no user should have access to the underlying storage (managed or external).
 
+## Architecture Diagram
+
+![Diagram](./docs/databricks-infra-base.excalidraw.png)
 
 ## TODOs
 
