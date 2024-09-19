@@ -28,3 +28,9 @@ resource "databricks_storage_credential" "catalog" {
   }
   owner = data.databricks_group.administrators.display_name
 }
+
+resource "databricks_default_namespace_setting" "this" {
+  namespace {
+    value = databricks_catalog.catalog.name
+  }
+}

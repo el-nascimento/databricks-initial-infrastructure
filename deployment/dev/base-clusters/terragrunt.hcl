@@ -4,8 +4,7 @@ include "backend" {
 }
 
 include "root" {
-  path   = find_in_parent_folders("terragrunt.hcl")
-  expose = true
+  path = find_in_parent_folders("terragrunt.hcl")
 }
 
 include "vars" {
@@ -24,25 +23,21 @@ include "region" {
 }
 
 terraform {
-  source = "../../../modules//base"
+  source = "../../../modules//clusters"
 }
 
 locals {
-  workspace_name = include.environment.inputs.prefix
 }
 
 inputs = {
-  cidr_block             = "10.3.0.0/16"
-  workspace_name         = local.workspace_name
-  workspace_metastore_id = dependency.metastore.outputs.databricks_metastore_id
 }
 
-dependency "metastore" {
-  config_path = "../../metastore"
+dependency "base" {
+  config_path = "../base"
 }
 
 dependencies {
-  paths = ["../../metastore"]
+  paths = ["../workspace-config", "../base", "../catalog"]
 }
 
 generate "db_provider" {
@@ -50,8 +45,7 @@ generate "db_provider" {
   if_exists = "overwrite_terragrunt"
   contents  = <<EOF
 provider "databricks" {
-  host          = "https://accounts.cloud.databricks.com"
-  account_id    = "${include.backend.locals.databricks_account_id}"
+  host          = "${dependency.base.outputs.databricks_host}"
 }
 EOF
 }

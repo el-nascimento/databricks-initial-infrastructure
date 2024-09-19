@@ -11,7 +11,11 @@ resource "databricks_mws_workspaces" "this" {
     comment = "Terraform"
   }
 
-  depends_on = [ databricks_mws_networks.this ]
+  depends_on = [databricks_mws_networks.this]
 
 }
 
+resource "databricks_metastore_assignment" "this" {
+  workspace_id = databricks_mws_workspaces.this.workspace_id
+  metastore_id = var.workspace_metastore_id
+}
