@@ -20,6 +20,10 @@ terraform {
 inputs = {
 }
 
+dependencies {
+  paths = ["../account"]
+}
+
 generate "db_provider" {
   path      = "databricks_provider.tf"
   if_exists = "overwrite_terragrunt"
