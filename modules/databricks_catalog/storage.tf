@@ -4,17 +4,8 @@ module "bucket" {
   bucket        = local.catalog_bucket
   force_destroy = true
   versioning = {
-    status = "Disabled"
+    enabled = false
   }
-}
-
-resource "aws_s3_bucket_public_access_block" "metastore" {
-  bucket                  = module.bucket.s3_bucket_id
-  block_public_acls       = true
-  block_public_policy     = true
-  ignore_public_acls      = true
-  restrict_public_buckets = true
-  depends_on              = [module.bucket]
 }
 
 data "aws_iam_policy_document" "passrole_for_catalog" {

@@ -106,3 +106,4 @@ providers possible.
 
 * [ ] Add instance profiles to cluster module
 * [ ] Add creation of instance pools
+* [ ] Move groups creation outside of dev environment
