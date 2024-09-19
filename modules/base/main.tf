@@ -1,7 +1,6 @@
 module "aws_base" {
   source                = "./aws_base/"
   cidr_block            = var.cidr_block
-  tags                  = var.tags
   region                = var.region
   databricks_account_id = var.databricks_account_id
   prefix                = var.prefix

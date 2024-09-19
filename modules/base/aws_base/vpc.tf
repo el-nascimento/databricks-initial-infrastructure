@@ -7,7 +7,6 @@ module "vpc" {
   name = "${local.prefix}-main-vpc"
   cidr = var.cidr_block
   azs  = data.aws_availability_zones.available.names
-  tags = var.tags
 
   enable_dns_hostnames = true
   enable_nat_gateway   = true
@@ -45,27 +44,17 @@ module "vpc_endpoints" {
       route_table_ids = flatten([
         module.vpc.private_route_table_ids,
       module.vpc.public_route_table_ids])
-      tags = {
-        Name = "${local.prefix}-s3-vpc-endpoint"
-      }
     },
     sts = {
       service             = "sts"
       private_dns_enabled = true
       subnet_ids          = module.vpc.private_subnets
-      tags = {
-        Name = "${local.prefix}-sts-vpc-endpoint"
-      }
     },
     kinesis-streams = {
       service             = "kinesis-streams"
       private_dns_enabled = true
       subnet_ids          = module.vpc.private_subnets
-      tags = {
-        Name = "${local.prefix}-kinesis-vpc-endpoint"
-      }
     },
   }
 
-  tags = var.tags
 }

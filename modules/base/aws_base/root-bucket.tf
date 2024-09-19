@@ -1,7 +1,6 @@
 resource "aws_s3_bucket" "root_storage_bucket" {
   bucket        = "${local.prefix}-rootbucket"
   force_destroy = true
-  tags          = var.tags
 }
 
 resource "aws_s3_bucket_versioning" "root_storage_bucket" {
