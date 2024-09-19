@@ -14,14 +14,14 @@ include "region" {
 }
 
 terraform {
-  source = "../../modules//databricks_metastore"
+  source = "../../modules//databricks_account"
 }
 
 inputs = {
-}
-
-dependencies {
-  paths = ["../account"]
+  account_level_groups = [
+    "DataEngineers",
+    "Administrators"
+  ]
 }
 
 generate "db_provider" {

@@ -27,13 +27,11 @@ terraform {
 }
 
 locals {
-  prefix = "${include.vars.locals.organization}-${include.vars.locals.project}-${include.region.locals.region}-${include.environment.locals.environment}"
 }
 
 inputs = {
-  prefix = local.prefix
   cluster_config = {
-    cluster_name            = "${local.prefix}-single-node-sandbox-cluster"
+    cluster_name            = "${include.environment.inputs.prefix}-single-node-sandbox-cluster"
     data_security_mode      = "SINGLE_USER"
     single_user_name        = "lucas.nascimento@qubika.com"
     runtime_engine          = "STANDARD"

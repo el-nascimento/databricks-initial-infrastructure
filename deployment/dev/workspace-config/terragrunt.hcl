@@ -27,11 +27,9 @@ terraform {
 }
 
 locals {
-  prefix = "${include.vars.locals.organization}-${include.vars.locals.project}-${include.region.locals.region}-${include.environment.locals.environment}"
 }
 
 inputs = {
-  prefix = local.prefix
 }
 
 dependency "base" {

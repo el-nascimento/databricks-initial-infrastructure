@@ -27,7 +27,6 @@ terraform {
 }
 
 locals {
-  prefix = "${include.vars.locals.organization}-${include.vars.locals.project}-${include.region.locals.region}-${include.environment.locals.environment}"
   catalog_name = "${include.environment.inputs.environment}_db"
 }
 
@@ -35,7 +34,6 @@ inputs = {
   name               = local.catalog_name
   metastore_id       = dependency.metastore.outputs.databricks_metastore_id
   databricks_host_id = dependency.base.outputs.databricks_host_id
-  prefix             = local.prefix
 }
 
 dependency "base" {

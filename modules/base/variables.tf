@@ -4,12 +4,6 @@ variable "cidr_block" {
   # default = "10.0.2.0/24"
 }
 
-variable "tags" {
-  type        = map(string)
-  description = "Tags for the resources"
-  default     = {}
-}
-
 variable "region" {
   type        = string
   description = "The region for deployment"
