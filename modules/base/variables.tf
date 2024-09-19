@@ -20,3 +20,8 @@ variable "workspace_name" {
 variable "prefix" {
   type = string
 }
+
+variable "workspace_metastore_id" {
+  description = "ID of the metastore to be used for the workspace"
+  type = string
+}

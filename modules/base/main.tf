@@ -12,6 +12,7 @@ module "databricks_base" {
   prefix                   = var.prefix
   region                   = var.region
   databricks_account_id    = var.databricks_account_id
+  workspace_metastore_id   = var.workspace_metastore_id
   cross_account_role_arn   = module.aws_base.cross_account_role_arn
   root_storage_bucket_name = module.aws_base.root_bucket
   logdelivery_bucket_name  = module.aws_base.logdelivery_bucket

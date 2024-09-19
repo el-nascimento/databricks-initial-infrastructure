@@ -2,6 +2,11 @@ variable "databricks_account_id" {
   type = string
 }
 
+variable "workspace_metastore_id" {
+  description = "ID of the metastore to be used for the workspace"
+  type = string
+}
+
 variable "root_storage_bucket_name" {
   type = string
 }

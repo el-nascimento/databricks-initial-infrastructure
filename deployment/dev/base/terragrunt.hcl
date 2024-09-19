@@ -32,8 +32,13 @@ locals {
 }
 
 inputs = {
-  cidr_block     = "10.3.0.0/16"
-  workspace_name = local.workspace_name
+  cidr_block             = "10.3.0.0/16"
+  workspace_name         = local.workspace_name
+  workspace_metastore_id = dependency.metastore.outputs.databricks_metastore_id
+}
+
+dependency "metastore" {
+  config_path = "../../metastore"
 }
 
 dependencies {
