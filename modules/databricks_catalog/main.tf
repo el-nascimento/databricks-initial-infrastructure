@@ -15,6 +15,8 @@ resource "databricks_external_location" "catalog" {
   url             = local.catalog_storage
   credential_name = databricks_storage_credential.catalog.id
   owner           = data.databricks_group.administrators.display_name
+  force_destroy   = true
+  force_update    = true
 }
 
 resource "databricks_storage_credential" "catalog" {

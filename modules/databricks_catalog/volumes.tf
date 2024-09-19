@@ -4,6 +4,8 @@ resource "databricks_external_location" "raw_data" {
   url             = "s3://${module.raw_bucket.s3_bucket_id}/"
   credential_name = databricks_storage_credential.raw_data.id
   owner           = data.databricks_group.administrators.display_name
+  force_destroy   = true
+  force_update    = true
 }
 
 resource "databricks_storage_credential" "raw_data" {
@@ -32,6 +34,8 @@ resource "databricks_external_location" "sandbox_data" {
   url             = "s3://${module.sandbox_bucket.s3_bucket_id}/"
   credential_name = databricks_storage_credential.sandbox_data.id
   owner           = data.databricks_group.administrators.display_name
+  force_destroy   = true
+  force_update    = true
 }
 
 resource "databricks_storage_credential" "sandbox_data" {
