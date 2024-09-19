@@ -4,7 +4,7 @@ include "backend" {
 }
 
 include "root" {
-  path = find_in_parent_folders("terragrunt.hcl")
+  path   = find_in_parent_folders("terragrunt.hcl")
   expose = true
 }
 
@@ -28,14 +28,12 @@ terraform {
 }
 
 locals {
-  prefix = "${include.vars.locals.organization}-${include.vars.locals.project}-${include.region.locals.region}-${include.environment.locals.environment}"
-  workspace_name = local.prefix
+  workspace_name = include.environment.inputs.prefix
 }
 
 inputs = {
-  cidr_block = "10.3.0.0/16"
-  workspace_name     = local.workspace_name
-  prefix             = local.prefix
+  cidr_block     = "10.3.0.0/16"
+  workspace_name = local.workspace_name
 }
 
 dependencies {
