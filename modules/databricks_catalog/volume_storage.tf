@@ -5,18 +5,9 @@ module "raw_bucket" {
   bucket        = local.raw_bucket
   force_destroy = true
   versioning = {
-    status = "Disabled"
+    enabled = false
   }
 }
-
-# resource "aws_s3_bucket_public_access_block" "raw_bucket" {
-#   bucket                  = module.raw_bucket.s3_bucket_id
-#   block_public_acls       = true
-#   block_public_policy     = true
-#   ignore_public_acls      = true
-#   restrict_public_buckets = true
-#   depends_on              = [module.raw_bucket]
-# }
 
 data "aws_iam_policy_document" "passrole_for_external_raw_bucket" {
   statement {
@@ -77,18 +68,9 @@ module "sandbox_bucket" {
   bucket        = local.sandbox_bucket
   force_destroy = true
   versioning = {
-    status = "Disabled"
+    enabled = false
   }
 }
-
-# resource "aws_s3_bucket_public_access_block" "sandbox_bucket" {
-#   bucket                  = module.sandbox_bucket.s3_bucket_id
-#   block_public_acls       = true
-#   block_public_policy     = true
-#   ignore_public_acls      = true
-#   restrict_public_buckets = true
-#   depends_on              = [module.sandbox_bucket]
-# }
 
 data "aws_iam_policy_document" "passrole_for_external_sandbox_bucket" {
   statement {
