@@ -39,6 +39,7 @@ variable "cluster_config" {
     spark_conf                   = optional(map(string))
     custom_tags                  = optional(map(string))
     aws_availability             = optional(string)
+    autoscale                    = optional(object({max_workers = number, min_workers = number}))
   })
 }
 

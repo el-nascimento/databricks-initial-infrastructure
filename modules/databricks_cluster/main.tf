@@ -14,6 +14,10 @@ resource "databricks_cluster" "this" {
   idempotency_token            = random_uuid.idempotency_token.result
   spark_conf                   = local.spark_conf
   custom_tags                  = local.custom_tags
+  autoscale {
+    max_workers = var.cluster_config.autoscale.max_workers
+    min_workers = var.cluster_config.autoscale.min_workers
+  }
   aws_attributes {
     availability = var.cluster_config.aws_availability
   }

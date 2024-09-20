@@ -9,7 +9,10 @@ variable "prefix" {
 
 variable "cluster_configs" {
   type = map(object({
-    workers = number
+    workers = object({
+      max = number
+      min = number
+    })
   }))
   description = "Configuration for clusters"
 }

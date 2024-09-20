@@ -29,7 +29,10 @@ terraform {
 inputs = {
   cluster_configs = {
     sandbox = {
-      workers = 2
+      workers = {
+        max = 5
+        min = 1
+      }
     }
   }
 }
