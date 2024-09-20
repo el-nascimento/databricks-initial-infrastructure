@@ -10,5 +10,8 @@ module "clusters" {
     data_security_mode = "USER_ISOLATION"
   }
   use_lts_runtime = true
+  power_user_groups = [
+    data.databricks_group.engineers.display_name
+  ]
   prefix          = var.prefix
 }
