@@ -7,7 +7,9 @@ variable "prefix" {
   description = "Resource prefix"
 }
 
-variable "region" {
-  type = string
-  description = "AWS Region"
+variable "cluster_configs" {
+  type = map(object({
+    workers = number
+  }))
+  description = "Configuration for clusters"
 }
