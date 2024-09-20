@@ -1,4 +1,4 @@
 
-output "cluster_ids" {
+output "clusters" {
   value = module.clusters
 }
