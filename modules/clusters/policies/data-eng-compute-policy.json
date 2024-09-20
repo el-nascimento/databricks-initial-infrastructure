@@ -16,15 +16,16 @@
   },
   "runtime_engine": {
     "type": "fixed",
-    "value": "STANDARD"
+    "value": "STANDARD",
+    "hidden": true
   },
   "node_type_id": {
     "type": "fixed",
     "value": "m5d.large"
   },
-  "numWorkers": {
+  "num_workers": {
     "type": "unlimited",
-    "defaultValue": 4,
+    "defaultValue": 3,
     "isOptional": true
   },
   "spark_version": {
@@ -39,5 +40,9 @@
     "defaultValue": true,
     "type": "unlimited",
     "hidden": true
+  },
+  "dbus_per_hour": {
+    "type": "range",
+    "maxValue": 5
   }
 }
