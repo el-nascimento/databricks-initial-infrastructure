@@ -5,7 +5,7 @@ resource "databricks_permissions" "base_users" {
   dynamic "access_control" {
     for_each = { for x in var.user_groups : x => x }
     content {
-      group_name       = each.key
+      group_name       = access_control.key
       permission_level = "CAN_ATTACH_TO"
     }
   }
@@ -13,7 +13,7 @@ resource "databricks_permissions" "base_users" {
   dynamic "access_control" {
     for_each = { for x in var.power_user_groups : x => x }
     content {
-      group_name       = each.key
+      group_name       = access_control.key
       permission_level = "CAN_RESTART"
     }
   }
@@ -21,7 +21,7 @@ resource "databricks_permissions" "base_users" {
   dynamic "access_control" {
     for_each = { for x in var.admin_groups : x => x }
     content {
-      group_name       = each.key
+      group_name       = access_control.key
       permission_level = "CAN_MANAGE"
     }
   }
