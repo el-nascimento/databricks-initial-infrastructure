@@ -23,7 +23,7 @@ include "region" {
 }
 
 terraform {
-  source = "../../../modules//clusters"
+  source = "../../../modules//databricks_de_clusters"
 }
 
 locals {
