@@ -26,10 +26,12 @@ terraform {
   source = "../../../modules//databricks_de_clusters"
 }
 
-locals {
-}
-
 inputs = {
+  cluster_configs = {
+    sandbox = {
+      workers = 2
+    }
+  }
 }
 
 dependency "base" {
