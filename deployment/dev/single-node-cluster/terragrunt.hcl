@@ -31,7 +31,7 @@ locals {
 
 inputs = {
   cluster_config = {
-    cluster_name            = "${include.environment.inputs.prefix}-single-node-sandbox-cluster"
+    cluster_name            = "single-node-cluster"
     data_security_mode      = "SINGLE_USER"
     single_user_name        = "lucas.nascimento@qubika.com"
     runtime_engine          = "STANDARD"
