@@ -3,6 +3,7 @@ resource "databricks_cluster" "this" {
   spark_version                = local.spark_version
   node_type_id                 = var.cluster_config.node_type_id
   cluster_name                 = "${var.prefix}-${var.cluster_config.cluster_name}"
+  driver_node_type_id          = var.cluster_config.node_type_id
   runtime_engine               = var.cluster_config.runtime_engine
   autotermination_minutes      = var.cluster_config.autotermination_minutes
   num_workers                  = var.cluster_config.num_workers
