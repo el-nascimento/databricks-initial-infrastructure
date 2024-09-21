@@ -9,6 +9,7 @@ variable "prefix" {
 
 variable "cluster_configs" {
   type = map(object({
+    node_type_id = string
     workers = object({
       max = number
       min = number

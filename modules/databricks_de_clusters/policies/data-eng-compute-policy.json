@@ -39,7 +39,7 @@
       "c6id.2xlarge",
       "c6id.4xlarge"
     ],
-    "defaultValue": "m5d.large"
+    "defaultValue": "c6id.xlarge"
   },
   "num_workers": {
     "type": "unlimited",

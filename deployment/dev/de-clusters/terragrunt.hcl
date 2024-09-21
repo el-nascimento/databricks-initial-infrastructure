@@ -29,8 +29,9 @@ terraform {
 inputs = {
   cluster_configs = {
     sandbox = {
+      node_type_id = "c6id.xlarge"
       workers = {
-        max = 5
+        max = 3
         min = 1
       }
     }
