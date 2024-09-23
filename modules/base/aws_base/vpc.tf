@@ -34,7 +34,7 @@ module "vpc_endpoints" {
   source  = "terraform-aws-modules/vpc/aws//modules/vpc-endpoints"
   version = "5.13.0"
 
-  depends_on = [ module.vpc ]
+  depends_on         = [module.vpc]
   vpc_id             = module.vpc.vpc_id
   security_group_ids = [module.vpc.default_security_group_id]
 
@@ -46,16 +46,16 @@ module "vpc_endpoints" {
         module.vpc.private_route_table_ids,
       module.vpc.public_route_table_ids])
     },
-    sts = {
-      service             = "sts"
-      private_dns_enabled = true
-      subnet_ids          = module.vpc.private_subnets
-    },
-    kinesis-streams = {
-      service             = "kinesis-streams"
-      private_dns_enabled = true
-      subnet_ids          = module.vpc.private_subnets
-    },
+    # sts = {
+    #   service             = "sts"
+    #   private_dns_enabled = true
+    #   subnet_ids          = module.vpc.private_subnets
+    # },
+    # kinesis-streams = {
+    #   service             = "kinesis-streams"
+    #   private_dns_enabled = true
+    #   subnet_ids          = module.vpc.private_subnets
+    # },
   }
 
 }
