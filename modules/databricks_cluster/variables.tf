@@ -2,6 +2,24 @@ variable "prefix" {
   type = string
 }
 
+variable "user_groups" {
+  type        = list(string)
+  description = "List of groups that can attach to the cluster"
+  default     = []
+}
+
+variable "power_user_groups" {
+  type        = list(string)
+  description = "List of groups that can attach and restart the cluster"
+  default     = []
+}
+
+variable "admin_groups" {
+  type        = list(string)
+  description = "List of groups that can manage the cluster"
+  default     = []
+}
+
 variable "cluster_config" {
   description = <<EOF
   Cluster configuration object. Includes many configuration attributes.
@@ -21,18 +39,19 @@ variable "cluster_config" {
     spark_conf                   = optional(map(string))
     custom_tags                  = optional(map(string))
     aws_availability             = optional(string)
+    autoscale                    = optional(object({max_workers = number, min_workers = number}))
   })
 }
 
 variable "spark_version" {
-  type = string
-  default = null
+  type        = string
+  default     = null
   description = "Version of spark for the runtime"
 }
 
 variable "use_lts_runtime" {
-  default = true
-  type = bool
+  default     = true
+  type        = bool
   description = "Use an LTS runtime"
 }
 
@@ -47,13 +66,13 @@ variable "pypi_libraries" {
 }
 
 data "databricks_spark_version" "latest" {
-  latest = true
+  latest            = true
   long_term_support = var.use_lts_runtime
-  spark_version = var.spark_version
+  spark_version     = var.spark_version
 }
 
 locals {
-  spark_version           = var.spark_version != null ? var.spark_version : data.databricks_spark_version.latest.id
+  spark_version = var.spark_version != null ? var.spark_version : data.databricks_spark_version.latest.id
   single_node_spark_conf = {
     "spark.databricks.cluster.profile" : "singleNode"
     "spark.master" : "local[*]"

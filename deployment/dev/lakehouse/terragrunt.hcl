@@ -27,7 +27,7 @@ terraform {
 }
 
 inputs = {
-  job_cluster_id     = dependency.cluster.outputs.cluster_id
+  job_cluster_id     = dependency.cluster.outputs.clusters.sandbox.cluster_id
 }
 
 dependency "base" {
@@ -35,7 +35,7 @@ dependency "base" {
 }
 
 dependency "cluster" {
-  config_path = "../single-node-cluster"
+  config_path = "../de-clusters"
 }
 
 generate "db_provider" {

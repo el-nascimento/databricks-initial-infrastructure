@@ -9,6 +9,7 @@ module "default_policy" {
     "awswrangler"
   ]
   maven_libraries = [
+    "com.databricks.labs:tika-ocr:0.1.6"
   ]
   policy_overrides = jsondecode(file("${path.module}/policies/data-eng-compute-policy.json"))
 }

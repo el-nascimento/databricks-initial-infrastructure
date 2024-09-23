@@ -16,15 +16,34 @@
   },
   "runtime_engine": {
     "type": "fixed",
-    "value": "STANDARD"
+    "value": "STANDARD",
+    "hidden": true
   },
   "node_type_id": {
-    "type": "fixed",
-    "value": "m5d.large"
+    "type": "allowlist",
+    "values": [
+      "m5d.large",
+      "m5d.xlarge",
+      "m5d.2xlarge",
+      "m5d.4xlarge",
+      "i3.large",
+      "i3.xlarge",
+      "i3.2xlarge",
+      "i3.4xlarge",
+      "r5d.large",
+      "r5d.xlarge",
+      "r5d.2xlarge",
+      "r5d.4xlarge",
+      "c6id.large",
+      "c6id.xlarge",
+      "c6id.2xlarge",
+      "c6id.4xlarge"
+    ],
+    "defaultValue": "c6id.xlarge"
   },
-  "numWorkers": {
+  "num_workers": {
     "type": "unlimited",
-    "defaultValue": 4,
+    "defaultValue": 3,
     "isOptional": true
   },
   "spark_version": {
@@ -39,5 +58,9 @@
     "defaultValue": true,
     "type": "unlimited",
     "hidden": true
+  },
+  "dbus_per_hour": {
+    "type": "range",
+    "maxValue": 10
   }
 }

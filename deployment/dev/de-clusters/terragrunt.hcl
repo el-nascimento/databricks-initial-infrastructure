@@ -23,13 +23,19 @@ include "region" {
 }
 
 terraform {
-  source = "../../../modules//clusters"
-}
-
-locals {
+  source = "../../../modules//databricks_de_clusters"
 }
 
 inputs = {
+  cluster_configs = {
+    sandbox = {
+      node_type_id = "c6id.xlarge"
+      workers = {
+        max = 3
+        min = 1
+      }
+    }
+  }
 }
 
 dependency "base" {
