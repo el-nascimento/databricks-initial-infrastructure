@@ -19,8 +19,9 @@ terraform {
 
 inputs = {
   account_level_groups = [
+    "DataAnalysts",
     "DataEngineers",
-    "Administrators"
+    "Administrators",
   ]
 }
 
