@@ -22,9 +22,9 @@ resource "databricks_external_location" "catalog" {
 resource "databricks_storage_credential" "catalog" {
   force_destroy = true
   force_update  = true
-  name          = aws_iam_role.catalog_data_access.name
+  name          = local.catalog_access_role_name
   aws_iam_role {
-    role_arn = aws_iam_role.catalog_data_access.arn
+    role_arn = local.catalog_access_role_arn
   }
   owner = data.databricks_group.administrators.display_name
 }
