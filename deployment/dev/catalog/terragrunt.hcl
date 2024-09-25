@@ -42,6 +42,7 @@ dependency "base" {
 
 dependency "metastore" {
   config_path = "../../metastore"
+
 }
 
 generate "db_provider" {
