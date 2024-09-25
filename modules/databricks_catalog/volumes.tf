@@ -11,9 +11,9 @@ resource "databricks_external_location" "raw_data" {
 resource "databricks_storage_credential" "raw_data" {
   force_destroy = true
   force_update  = true
-  name          = aws_iam_role.raw_data_access.name
+  name          = local.raw_bucket_access_role_name
   aws_iam_role {
-    role_arn = aws_iam_role.raw_data_access.arn
+    role_arn = local.raw_bucket_access_role_arn
   }
   owner = data.databricks_group.administrators.display_name
 }
@@ -41,9 +41,9 @@ resource "databricks_external_location" "sandbox_data" {
 resource "databricks_storage_credential" "sandbox_data" {
   force_destroy = true
   force_update  = true
-  name          = aws_iam_role.sandbox_data_access.name
+  name          = local.sandbox_bucket_access_role_name
   aws_iam_role {
-    role_arn = aws_iam_role.sandbox_data_access.arn
+    role_arn = local.sandbox_bucket_access_role_arn
   }
   owner = data.databricks_group.administrators.display_name
 }

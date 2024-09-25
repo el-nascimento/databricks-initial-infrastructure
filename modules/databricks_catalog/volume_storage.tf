@@ -9,55 +9,26 @@ module "raw_bucket" {
   }
 }
 
-data "aws_iam_policy_document" "passrole_for_external_raw_bucket" {
-  statement {
-    effect  = "Allow"
-    actions = ["sts:AssumeRole"]
-    principals {
-      identifiers = [local.unity_catalog_role_arn]
-      type        = "AWS"
-    }
-    condition {
-      test     = "StringEquals"
-      variable = "sts:ExternalId"
-      values   = [var.databricks_account_id]
-    }
-  }
+data "databricks_aws_unity_catalog_assume_role_policy" "external_raw_bucket" {
+  aws_account_id = data.aws_caller_identity.current.account_id
+  role_name      = local.raw_bucket_access_role_name
+  external_id    = databricks_storage_credential.raw_data.aws_iam_role[0].external_id
+}
+
+data "databricks_aws_unity_catalog_policy" "external_raw_bucket" {
+  aws_account_id = data.aws_caller_identity.current.account_id
+  bucket_name    = module.raw_bucket.s3_bucket_id
+  role_name      = local.raw_bucket_access_role_name
 }
 
 resource "aws_iam_policy" "external_raw_bucket" {
-  policy = jsonencode({
-    Version = "2012-10-17"
-    Id      = "${module.raw_bucket.s3_bucket_id}-policy"
-    Statement = [
-      {
-        "Action" : [
-          "s3:Get*",
-          "s3:Put*",
-          "s3:List*",
-          "s3:DeleteObject"
-          # "s3:GetObject",
-          # "s3:GetObjectVersion",
-          # "s3:PutObject",
-          # "s3:PutObjectAcl",
-          # "s3:DeleteObject",
-          # "s3:ListBucket",
-          # "s3:GetBucketLocation"
-        ],
-        "Resource" : [
-          module.raw_bucket.s3_bucket_arn,
-          "${module.raw_bucket.s3_bucket_arn}/*"
-        ],
-        "Effect" : "Allow"
-      }
-    ]
-  })
+  policy = data.databricks_aws_unity_catalog_policy.external_raw_bucket.json
 }
 
 
 resource "aws_iam_role" "raw_data_access" {
-  name                = "${module.raw_bucket.s3_bucket_id}-access"
-  assume_role_policy  = data.aws_iam_policy_document.passrole_for_external_raw_bucket.json
+  name                = local.raw_bucket_access_role_name
+  assume_role_policy  = data.databricks_aws_unity_catalog_assume_role_policy.external_raw_bucket.json
   managed_policy_arns = [aws_iam_policy.external_raw_bucket.arn]
 }
 
@@ -72,54 +43,24 @@ module "sandbox_bucket" {
   }
 }
 
-data "aws_iam_policy_document" "passrole_for_external_sandbox_bucket" {
-  statement {
-    effect  = "Allow"
-    actions = ["sts:AssumeRole"]
-    principals {
-      identifiers = [local.unity_catalog_role_arn]
-      type        = "AWS"
-    }
-    condition {
-      test     = "StringEquals"
-      variable = "sts:ExternalId"
-      values   = [var.databricks_account_id]
-    }
-  }
+data "databricks_aws_unity_catalog_assume_role_policy" "external_sandbox_bucket" {
+  aws_account_id = data.aws_caller_identity.current.account_id
+  role_name      = local.sandbox_bucket_access_role_name
+  external_id    = databricks_storage_credential.sandbox_data.aws_iam_role[0].external_id
+}
+
+data "databricks_aws_unity_catalog_policy" "external_sandbox_bucket" {
+  aws_account_id = data.aws_caller_identity.current.account_id
+  bucket_name    = module.sandbox_bucket.s3_bucket_id
+  role_name      = local.sandbox_bucket_access_role_name
 }
 
 resource "aws_iam_policy" "external_sandbox_bucket" {
-  policy = jsonencode({
-    Version = "2012-10-17"
-    Id      = "${module.sandbox_bucket.s3_bucket_id}-policy"
-    Statement = [
-      {
-        "Action" : [
-          "s3:Get*",
-          "s3:Put*",
-          "s3:List*",
-          "s3:DeleteObject"
-          # "s3:GetObject",
-          # "s3:GetObjectVersion",
-          # "s3:PutObject",
-          # "s3:PutObjectAcl",
-          # "s3:DeleteObject",
-          # "s3:ListBucket",
-          # "s3:GetBucketLocation"
-        ],
-        "Resource" : [
-          module.sandbox_bucket.s3_bucket_arn,
-          "${module.sandbox_bucket.s3_bucket_arn}/*"
-        ],
-        "Effect" : "Allow"
-      }
-    ]
-  })
+  policy = data.databricks_aws_unity_catalog_policy.external_sandbox_bucket.json
 }
 
-
 resource "aws_iam_role" "sandbox_data_access" {
-  name                = "${module.sandbox_bucket.s3_bucket_id}-access"
-  assume_role_policy  = data.aws_iam_policy_document.passrole_for_external_sandbox_bucket.json
+  name                = local.sandbox_bucket_access_role_name
+  assume_role_policy  = data.databricks_aws_unity_catalog_assume_role_policy.external_sandbox_bucket.json
   managed_policy_arns = [aws_iam_policy.external_sandbox_bucket.arn]
 }
