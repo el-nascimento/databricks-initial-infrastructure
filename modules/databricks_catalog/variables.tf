@@ -12,10 +12,6 @@ variable "databricks_account_id" {
   type = string
 }
 
-variable "databricks_host_id" {
-  type = string
-}
-
 variable "metastore_id" {
   type = string
 }
@@ -42,5 +38,4 @@ locals {
   sandbox_bucket                  = "${local.prefix}-sandbox"
   sandbox_bucket_access_role_name = "${module.sandbox_bucket.s3_bucket_id}-access"
   sandbox_bucket_access_role_arn  = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/${local.sandbox_bucket_access_role_name}"
-  unity_catalog_role_arn          = "arn:aws:iam::414351767826:role/unity-catalog-prod-UCMasterRole-14S5ZJVKOTYTL"
 }
