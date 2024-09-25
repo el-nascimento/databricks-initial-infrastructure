@@ -10,6 +10,7 @@ variable "prefix" {
 variable "cluster_configs" {
   type = map(object({
     node_type_id = string
+    autotermination_minutes = optional(number, 120)
     workers = object({
       max = number
       min = number
