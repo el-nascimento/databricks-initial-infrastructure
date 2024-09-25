@@ -9,6 +9,7 @@ module "clusters" {
     cluster_policy_id  = module.default_policy.policy_id
     data_security_mode = "USER_ISOLATION"
     runtime_engine     = "STANDARD"
+    autotermination_minutes = each.value.autotermination_minutes
     autoscale = {
       max_workers = each.value.workers.max
       min_workers = each.value.workers.min

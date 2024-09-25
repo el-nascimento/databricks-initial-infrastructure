@@ -30,6 +30,7 @@ inputs = {
   cluster_configs = {
     sandbox = {
       node_type_id = "c6id.xlarge"
+      autotermination_minutes = 120
       workers = {
         max = 3
         min = 1
